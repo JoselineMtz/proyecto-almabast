@@ -1,0 +1,83 @@
+{% load static %}
+
+<!doctype html>
+<html lang="es">
+
+<head>
+    <title>JAGUARETE KAA</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Mis estilos CSS -->
+    <link rel="stylesheet" href="{% static 'sitio/style.css' %}">
+</head>
+
+<body>
+
+    <header class="d-flex py-2 bg-light border-bottom">
+        <div class="container">
+            <a class="m-0 p-0 text-dark" href="/" style="font-size: 1.5em; text-decoration: none;">
+                ALMABAST
+            </a>
+            <!-- <div class="ml-auto d-flex">
+    
+                {% if user.is_authenticated %}
+                    <! - - Estas conectado como: { { user.get_username } }  - - >
+                    <a role="button" class="btn btn-secondary mr-3" href=" {% url 'logout'%}?next={{request.path}}">
+                        Salir
+                    </a>
+                {% else %}                  
+                    <a role="button" class="btn btn-primary mr-3" href="{% url 'login'%}?next={{request.path}}">
+                        Ingresar
+                    </a>
+                    <a role="button" class="btn btn-secondary mr-3" href="{% url 'SITIO:register' %}">
+                        Registrarse
+                    </a>
+                {% endif %}
+    
+                <a role="button" class="btn btn-success mr-3"  href="#">
+                    Carrito
+                </a>
+    
+            </div> -->
+        </div>
+    </header>
+
+    <main class="container my-4">
+
+        {% block content %}
+        {% endblock %}
+
+    </main>
+    <footer class="bg-light p-3 border-top">
+        <div class="container">
+            <p class="p-0 m-0 mb-2 logo-empresa-footer">ALMABAST | Derechos reservados &reg;</p>
+            <p class="p-0 m-0 mx-5 text-secondary">Desarrollado por Arlette Martinez Y Esteban Guajardo</p>
+            <!-- <p class="p-0 m-0"> </p> -->
+        </div>
+    </footer>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    {% block extra_js %}
+    <!-- Aquí puedes agregar tus scripts JavaScript adicionales -->
+    {% endblock %}
+</body>
+
+</html>

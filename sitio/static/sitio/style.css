@@ -1,0 +1,79 @@
+.nav-logo{
+    font-size: 1.5em;
+}
+
+.logo-empresa-footer{
+    font-size: 1.3em;
+}
+
+.nav-link{
+    font-size: 1.1em;
+    margin: 0 5px;
+}
+
+textarea{
+    resize: none;
+}
+
+a{
+    text-decoration: none !important;
+}
+
+footer div > p{
+    display: flex;
+    justify-content: center;
+}
+
+.card-body-3-productos-home{
+    text-align: center;
+}
+
+.card-body-3-productos-home h4{
+    padding-bottom: 5px;
+}
+
+.card-img-3-producto-home{
+    overflow: hidden;
+}
+
+.card-img-3-producto-home img {
+    height: 280px;
+    min-width: 280px;
+}
+
+.card-img-producto-home{
+    overflow: hidden;
+}
+
+.card-img-producto-home img{
+    height: 200px;
+    min-width: 200px;
+}
+
+.card-body-productos-home{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.busqueda-content__titulo h2{
+    font-size: 3em;
+}
+
+.detalle-producto-content__text h1{
+    font-size: 3em;
+}
+
+.detalle-producto-content__text h2{
+    font-size: 1.5em;
+    font-weight: 400;
+}
+
+.title-form-register{
+    font-size: 2.8em;
+}
+.img-farmacia {
+    max-width: 9px; /* Ajusta el ancho máximo de la imagen */
+    height: auto; /* Permite que la altura se ajuste automáticamente */
+}

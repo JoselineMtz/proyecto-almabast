@@ -1,0 +1,76 @@
+{% extends 'registration/layout.html' %}
+
+{% block content %}
+<div class="row">
+
+    <!-- MENSAJE -->
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show col-12" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <strong>{{ message }}</strong> 
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <!-- TITULO -->
+    <div class="col-12 mb-3">
+        <h1 class="text-uppercase text-center display-4 title-form-register">REGISTRARSE</h1>
+    </div>
+
+    <!-- FORMULARIO -->
+    <form action="" method="POST" class="col-md-8 mx-auto">
+        {% csrf_token %}
+
+        <!-- EMAIL -->
+        <div class="form-group row ">
+            <label for="email" class="col-4 col-form-label text-right">Email:</label>
+            <div class="col-8 col-lg-6">
+                <input type="text" class="form-control" id="email" name="email" aria-describedat="emailHelp">
+                <small id="emailHelp" class="text-muted">Debe contener un @ y .com</small>
+            </div>
+        </div>
+
+        <!-- USUARIO -->
+        <div class="form-group row ">
+            <label for="usuario" class="col-4 col-form-label text-right">Usuario:</label>
+            <div class="col-8 col-lg-6">
+                <input type="text" class="form-control" id="usuario" name="username" aria-describedby="usernameHelp">
+                <small id="usernameHelp" class="text-muted">150 carácteres como máximo. Únicamente letras, dígitos y @/./+/-/_</small>
+            </div>
+        </div>
+
+        <!-- PASSWORD -->
+        <div class="form-group row ">
+            <label for="password" class="col-4 col-form-label text-right">Password:</label>
+            <div class="col-8 col-lg-6">
+                <input type="password" class="form-control" id="password" name="password1" aria-describedby="password1Help">
+                <small id="password1Help" class="text-muted">
+                    No puede asemejarse tanto a su otra información personal. <br>
+                    Debe contener al menos 8 caracteres. <br>
+                    No puede ser una clave utilizada comúnmente. <br>
+                    No puede ser completamente numérica.
+                </small>
+            </div>
+        </div>
+
+        <!-- PASSWORD REPEAT -->
+        <div class="form-group row ">
+            <label for="passwordRepeat" class="col-4 col-form-label text-right">Repetir Password:</label>
+            <div class="col-8 col-lg-6">
+                <input type="password" class="form-control" id="passwordRepeat" name="password2" aria-describedby="password2Help">
+                <small id="password2Help" class="text-muted">Repita la password anterior</small>
+            </div>
+        </div>
+        
+        <!-- BOTONES -->
+        <div class="form-group row mt-4">
+            <div class="col-4 col-md-4 col-lg-3 offset-4 offset-lg-4">    
+                <button type="submit" class="btn btn-success btn-block text-uppercase">Registrarse</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

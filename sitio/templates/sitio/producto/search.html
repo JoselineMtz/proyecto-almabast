@@ -1,0 +1,60 @@
+{% extends "sitio/layout.html" %}
+
+{% block content %}
+<section class="row mt-5">
+
+    <!-- Titulo -->
+    <div class="col-12 mb-4 busqueda-content__titulo">
+        {% if categoria %}
+        <h2 class="display-4 text-center text-capitalize ">
+            {{ titulo_seccion }}
+            <strong>
+                "{{ categoria }}"
+            </strong>
+        </h2>
+        {% endif %}
+
+        {% if texto_buscado %}
+        <h2 class="display-4 text-center text-capitalize ">
+            {{ titulo_seccion }}
+            <strong>
+                "{{ texto_buscado }}"
+            </strong>
+        </h2>
+        {% endif %}
+    </div>
+
+    <!-- Productos -->
+    <div class="row row-cols-1 row-cols-md-3 container justify-content-center">
+
+        {% for producto in productos %}
+            <div class="col-6 col-md-4 col-lg-3 mb-4">
+                <div class="card h-100 card-img-producto-home">
+                    <!-- src="https://picsum.photos/200/200?random={{ forloop.counter }}" -->
+                    <img 
+                    class="card-img-top mx-auto"
+                    src="{{MEDIA_URL}}{{producto.imagen.url}}"
+                    alt="{{producto.titulo}}"
+                    >
+                    <div class="card-body text-center">
+                        <h4 class="card-title">{{ producto.titulo.title|truncatechars:30 }}</h4>
+                        <p class="card-text ">{{ producto.descripcion.capitalize|truncatechars:50 }}</p>
+                        <a href="{% url 'SITIO:producto_show' producto.id %}" class="btn btn-danger btn-block">Ver</a>
+
+                        {% if user.is_superuser %}
+                            <a href="{% url 'SITIO:producto_edit' producto.id %}" class="btn btn-outline-secondary btn-block">Editar</a>
+                            <a href="{% url 'SITIO:producto_delete' producto.id %}" class="btn btn-outline-danger btn-block">Eliminar</a>
+                        {% endif %}
+                        
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+        <h2 class="col-12 display-4 text-center mt-5" style="font-size: 2em; height: 30vh;">No hay productos que
+            coincidan</h2>
+        {% endfor %}
+
+    </div>
+
+</section>
+{% endblock %}

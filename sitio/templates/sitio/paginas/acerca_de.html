@@ -1,0 +1,118 @@
+
+{% extends 'sitio/layout.html' %}
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12 colTfarmacia d-flex align-items-center">
+            <img src="{% static 'imagenes/salud.png' %}" alt="" class="img-farmacia" style="max-width: 200px;">
+            <h2 class="titulo-frm ms-3">CONOCE LAS FARMACIAS EN TURNO</h2>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col">
+            <div class="listaComunas">
+                <label for="comuna-filter">Filtrar por Comuna:</label>
+                <select id="comuna-filter" class="form-select">
+                    <option value="">Selecciona una comuna</option>
+                    <!-- Opciones de comuna se llenan dinámicamente con JavaScript -->
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col">
+            <div id="api-data"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const URL = "https://midas.minsal.cl/farmacia_v2/WS/getLocales.php";
+
+        fetch(URL)
+            .then(response => response.json())
+            .then(data => {
+                const pharmacies = data;
+
+                const comunaFilter = document.getElementById('comuna-filter');
+                const comunas = [...new Set(pharmacies.map(pharmacy => pharmacy.comuna_nombre))];
+                
+                comunas.forEach(comuna => {
+                    const option = document.createElement('option');
+                    option.value = comuna;
+                    option.textContent = comuna;
+                    comunaFilter.appendChild(option);
+                });
+
+                // Mostrar todas las farmacias inicialmente
+                displayPharmacies(pharmacies);
+
+                // Event listener para el cambio de comuna
+                comunaFilter.addEventListener('change', () => {
+                    const selectedComuna = comunaFilter.value;
+                    if (selectedComuna === "") {
+                        displayPharmacies(pharmacies); // Mostrar todas las farmacias si no hay comuna seleccionada
+                    } else {
+                        const filteredPharmacies = pharmacies.filter(pharmacy => pharmacy.comuna_nombre === selectedComuna);
+                        displayPharmacies(filteredPharmacies);
+                    }
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching API:', error);
+            });
+
+        function displayPharmacies(pharmacies) {
+            const apiDataDiv = document.getElementById("api-data");
+            apiDataDiv.innerHTML = "";
+
+            const table = document.createElement("table");
+            table.classList.add('table', 'table-striped', 'table-bordered');
+
+            const tableHeader = document.createElement("thead");
+            const headerRow = document.createElement("tr");
+            ["Nombre", "Comuna", "Dirección", "Horario de Apertura", "Horario de Cierre", "Teléfono", "Ubicación"].forEach(headerText => {
+                const th = document.createElement("th");
+                th.textContent = headerText;
+                headerRow.appendChild(th);
+            });
+            tableHeader.appendChild(headerRow);
+            table.appendChild(tableHeader);
+
+            const tableBody = document.createElement("tbody");
+            pharmacies.forEach((item) => {
+                const row = document.createElement("tr");
+                ["local_nombre", "comuna_nombre", "local_direccion", "funcionamiento_hora_apertura", "funcionamiento_hora_cierre", "local_telefono"].forEach(data => {
+                    const td = document.createElement("td");
+                    td.textContent = item[data];
+                    row.appendChild(td);
+                });
+
+                const locationTd = document.createElement("td");
+                const locationButton = document.createElement("a");
+                locationButton.classList.add('btn', 'btn-primary');
+                locationButton.textContent = "Ir";
+                
+                const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.local_direccion)}`;
+                locationButton.href = googleMapsUrl;
+                locationButton.target = "_blank";
+                locationTd.appendChild(locationButton);
+                
+                row.appendChild(locationTd);
+                tableBody.appendChild(row);
+            });
+            
+            table.appendChild(tableBody);
+            apiDataDiv.appendChild(table);
+        }
+    });
+</script>
+
+{% endblock %}

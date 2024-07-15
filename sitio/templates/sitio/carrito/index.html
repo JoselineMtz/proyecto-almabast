@@ -1,0 +1,49 @@
+{% extends "sitio/layout.html" %}
+
+{% block content %}
+<main class="container my-5">
+    <div class="row justify-content-center">
+
+        <!-- TITULO -->
+        <div class="col-12 mb-3">
+            <h2 class="display-4 text-center text-capitalize">carrito</h2>
+        </div>
+
+        <div class="col-6 row border">
+
+            <!-- USUARIO -->
+            <div class="col-12 p-0 mb-2">
+                <h3 class="display-4 text-capitalize mt-2" style="font-size: 2em;">{{usuario.username.capitalize}}</h3>
+            </div>
+
+            <!-- PRODUCTOS -->
+            {% for item in items_carrito %}
+                <div class="col-12 p-0 m-0">
+                    <p class="d-flex justify-content-between align-items-center">
+                        {{ forloop.counter }}. {{item.producto.titulo.title}} - ${{ item.producto.precio }}
+                        <a href="{% url 'SITIO:item_carrito_delete' item.id %}">X</a>
+                    </p>
+                </div>
+            {% empty %}
+                <div class="col-12 p-0 m-0">
+                    <p class="d-flex justify-content-between align-items-center">
+                        No tiene ningun producto en el carrito
+                    </p>
+                </div>
+            {% endfor %}
+
+            <!-- BOTONES -->
+            <div class="col-12 p-0 m-0 my-3 row ">
+                <div class="col-md-5 col-lg-3 p-0">
+                    <a href="{% url 'SITIO:carrito_clean' %}" class="btn btn-danger btn-block">Vaciar Carrito</a>
+                </div>
+                <div class="col-12 p-0 col-md-7 col-lg-4 mt-2 mt-md-0 pl-md-3">
+                    <button class="btn btn-success btn-block">Finalizar Compra</button>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</main>
+{% endblock %}

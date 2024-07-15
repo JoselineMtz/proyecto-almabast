@@ -1,0 +1,193 @@
+{% extends "sitio/layout.html" %}
+{% load static %}
+
+{% block content %}
+
+    <!-- Mensajes de alerta -->
+    {% if messages %}
+        <div class="row mt-3">
+            <div class="col-12">
+                {% for message in messages %}
+                    <div class="alert alert-warning alert-dismissible fade show col-12" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                        <strong>{{ message }}</strong>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
+    <!-- Carrusel -->
+    <div id="promocionesCarousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <!-- Imágenes Promocionales -->
+            <div class="carousel-item active">
+                <img src="{% static 'promociones/promo1.png' %}" class="d-block w-100" alt="Promo 1">
+                <div class="carousel-caption d-none d-md-block">
+               
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'promociones/promo2.png' %}" class="d-block w-100" alt="Promo 2">
+                <div class="carousel-caption d-none d-md-block">
+                
+                </div>
+            </div>
+            <!-- Agregar más items según sea necesario -->
+        </div>
+        <a class="carousel-control-prev" href="#promocionesCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Anterior</span>
+        </a>
+        <a class="carousel-control-next" href="#promocionesCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Siguiente</span>
+        </a>
+    </div>
+
+   
+    <!-- Sección ¿POR QUÉ ELEGIRNOS? -->
+    <div class="container mt-5 mb-5 espacios">
+        <div class="row">
+            <div class="col-12 text-center espacios">
+                <h1 class="titulosH1">¿POR QUÉ ELEGIRNOS?</h1>
+            </div>
+        </div>
+        <div class="row text-center mt-3">
+            <div class="col-md-4 col-sm-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">UBICACIÓN</h5>
+                        <img src="{% static 'imagenes/iconou.jpg' %}" class="card-img-top img-fluid img-small" alt="Icono Ubicación">
+                        <p class="card-text mt-3">Visítanos contamos con múltiples locales a lo largo de toda la V región.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">PRECIOS</h5>
+                        <img src="{% static 'imagenes/iconoD.png' %}" class="card-img-top img-fluid img-small" alt="Icono Precios">
+                        <p class="card-text mt-3">Te apoyamos ofreciendo los precios más accesibles para ti.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">CERCANIA</h5>
+                        <img src="{% static 'imagenes/icinoComunidad.png' %}" class="card-img-top img-fluid img-small" alt="Icono Cercania">
+                        <p class="card-text mt-3">Buscamos ser un pilar de apoyo fundamental en la economía de tu familia.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- Carrusel de Logos -->
+    <div class="container mt-5 mb-5 espacios">
+        <div class="row">
+            <div class="col-12 text-center espacios">
+                <h1 class="titulosH1">TENEMOS LAS MEJORES MARCAS PARA TI</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div id="carouselLogos" class="carousel slide logos-carousel" data-bs-ride="carousel" data-bs-interval="9000">
+                    <div class="carousel-list d-flex justify-content-around">
+                        <img src="{% static 'imagenes/log1.svg' %}" class="img-fluid logo-img" alt="Logo 1">
+                        <img src="{% static 'imagenes/lg2.png' %}" class="img-fluid logo-img" alt="Logo 2">
+                        <img src="{% static 'imagenes/lg3.svg' %}" class="img-fluid logo-img" alt="Logo 3">
+                        <img src="{% static 'imagenes/lg5.webp' %}" class="img-fluid logo-img" alt="Logo 2">
+                        <img src="{% static 'imagenes/lg6.png' %}" class="img-fluid logo-img" alt="Logo 3">
+                        <img src="{% static 'imagenes/lg7.png' %}" class="img-fluid logo-img" alt="Logo 4">
+                        <img src="{% static 'imagenes/log1.svg' %}" class="img-fluid logo-img" alt="Logo 1">
+                        <img src="{% static 'imagenes/lg2.png' %}" class="img-fluid logo-img" alt="Logo 2">
+                        <img src="{% static 'imagenes/lg3.svg' %}" class="img-fluid logo-img" alt="Logo 3">
+                        <img src="{% static 'imagenes/lg5.webp' %}" class="img-fluid logo-img" alt="Logo 2">
+                        <img src="{% static 'imagenes/lg6.png' %}" class="img-fluid logo-img" alt="Logo 3">
+                        <img src="{% static 'imagenes/lg7.png' %}" class="img-fluid logo-img" alt="Logo 4">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ULTIMOS 3 PRODUCTOS -->
+    <section class="row mt-5 mb-5 espacios">
+        <div class="col-12 mb-4">
+            <h1 class="display-4 text-center">Últimos Productos</h1>
+        </div>
+
+        {% for producto in productos_top3 %}
+            <div class="col-12 col-sm-6 col-md-4 mb-3">
+                <div class="card card-img-3-producto-home">
+                    <div class="h-100">
+                        <img class="card-img-top mx-auto" src="{{ MEDIA_URL }}{{ producto.imagen.url }}" alt="{{ producto.titulo }}">
+                    </div>
+                    <div class="card-body card-body-3-productos-home">
+                        <h4 class="card-title text-truncate">{{ producto.titulo|truncatechars:25 }}</h4>
+                        <p class="card-text">{{ producto.descripcion|truncatechars:70 }}</p>
+                        <a href="{% url 'SITIO:producto_show' producto.id %}" class="btn btn-danger btn-block">Ver</a>
+                        
+                        {% if user.is_superuser %}
+                            <a href="{% url 'SITIO:producto_edit' producto.id %}" class="btn btn-outline-secondary btn-block">Editar</a>
+                            <a href="{% url 'SITIO:producto_delete' producto.id %}" class="btn btn-outline-danger btn-block">Eliminar</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </section>
+
+
+
+
+
+    <!-- JavaScript para movimiento continuo -->
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const logosCarousel = document.querySelector('.carousel-list');
+        const clone = logosCarousel.innerHTML;
+        logosCarousel.innerHTML += clone;
+    });
+    </script>
+
+    <!-- CSS para el carrusel -->
+    <style>
+         .img-small {
+        max-height: 199px; /* Ajusta la altura máxima de las imágenes */
+    }
+        .espacios{
+            margin-top: 50px;
+        }
+    .logos-carousel {
+        overflow: hidden;
+        position: relative;
+    }
+
+    .carousel-list {
+        display: flex;
+        animation: scroll 30s linear infinite;
+    }
+
+    .carousel-list img {
+        max-width: 134px; /* Ajusta el tamaño según sea necesario */
+        margin: 0 15px; /* Espacio entre las imágenes */
+    }
+
+    @keyframes scroll {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(calc(-100px * 12)); /* Ajusta el valor multiplicando el ancho de la imagen por la cantidad de imágenes */
+        }
+    }
+
+    </style>
+
+{% endblock %}
